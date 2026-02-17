@@ -1,0 +1,17 @@
+{
+  "workday": {
+    "total_spent": 0,
+    "avg_spent": 0,
+    "transactions": 0,
+    "days": 0
+  },
+  "weekend": {
+    "total_spent": 0,
+    "avg_spent": 0,
+    "transactions": 0,
+    "days": 0
+  },
+  "comparison": {
+    "workday_vs_weekend_ratio": 0
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "generated_at": "2026-02-13 15:13:13",
+  "main_page": {
+    "error": "Внутренняя ошибка сервера: Excel file format cannot be determined, you must specify an engine manually."
+  },
+  "services": {
+    "error": "Excel file format cannot be determined, you must specify an engine manually."
+  },
+  "reports": {
+    "error": "Excel file format cannot be determined, you must specify an engine manually."
+  },
+  "utils": {
+    "error": "Excel file format cannot be determined, you must specify an engine manually."
+  }
+}
