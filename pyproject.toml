@@ -31,3 +31,17 @@ lint = [
     "black (>=26.1.0,<27.0.0)",
     "isort (>=7.0.0,<8.0.0)"
 ]
+[tool.black]
+line-length = 119
+target-version = ['py38', 'py39', 'py310']
+
+[tool.isort]
+profile = "black"
+line_length = 119
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+strict_optional = true

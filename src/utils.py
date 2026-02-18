@@ -127,8 +127,11 @@ def read_transactions_from_excel(
             df["Дата операции"], format="%d.%m.%Y %H:%M:%S"
         )
 
-        # Очистка суммы операции
-        df["Сумма операции"] = df["Сумма операции"].str.replace(",", ".").astype(float)
+        if df["Сумма операции"].dtype == 'object':
+            df["Сумма операции"] = df["Сумма операции"].str.replace(",", ".")
+
+            # Преобразуем в числа, ошибки преобразуются в NaN
+        df["Сумма операции"] = pd.to_numeric(df["Сумма операции"], errors='coerce')
 
         return df
     except Exception as e:

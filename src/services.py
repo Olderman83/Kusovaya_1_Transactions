@@ -10,23 +10,28 @@ def analyze_cashback_categories(
     data: Union[pd.DataFrame, List[Dict[str, Any]]], year: int, month: int
 ) -> str:
     """Анализирует, какие категории были наиболее выгодными для выбора
-    в качестве категорий повышенного кешбэка за указанный месяц."""
-    logger.info(f"Запуск анализа кешбэка за {year}-{month:02d}")
+    в качестве категорий повышенного кэшбэка за указанный месяц."""
+    logger.info(f"Запуск анализа кэшбэка за {year}-{month:02d}")
 
     try:
         # Быстрое преобразование данных
         df = pd.DataFrame(data) if isinstance(data, list) else data.copy()
 
         # Валидация колонок одной операцией
-        required_columns = {"Дата операции", "Категория", "Сумма платежа", "Кешбэк"}
+        required_columns = {"Дата операции", "Категория", "Сумма платежа", "Кэшбэк"}
         if missing := required_columns - set(df.columns):
             logger.error(f"Отсутствуют необходимые колонки: {missing}")
             raise ValueError(f"В данных отсутствуют колонки: {missing}")
 
         # Оптимизированная фильтрация по дате
         df["Дата операции"] = pd.to_datetime(
-            df["Дата операции"], format="%d.%m.%Y", errors="coerce"
-        ).dropna()
+            df["Дата операции"], format="%Y-%m-%d %H:%M:%S", errors="coerce"
+        ).dt.date
+
+        df = df.dropna(subset=["Дата операции"])
+
+        # Преобразуем дату обратно в datetime для фильтрации по месяцу и году
+        df["Дата операции"] = pd.to_datetime(df["Дата операции"])
 
         # Векторизованная фильтрация
         mask = (
@@ -41,7 +46,7 @@ def analyze_cashback_categories(
             logger.warning(f"Нет расходных операций за {year}-{month:02d}")
             return "{}"
 
-        # Агрегация с вычислением кешбэка за один проход
+        # Агрегация с вычислением кэшбэка за один проход
         cashback_by_category = (
             filtered_df.groupby("Категория")["Сумма платежа"]
             .sum()
@@ -56,5 +61,5 @@ def analyze_cashback_categories(
         return json.dumps(cashback_by_category, ensure_ascii=False, indent=2)
 
     except Exception as e:
-        logger.error(f"Ошибка при анализе кешбэка: {e}")
+        logger.error(f"Ошибка при анализе кэшбэка: {e}")
         raise
