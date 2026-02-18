@@ -1,0 +1,21 @@
+{
+  "рабочие_дни": {
+    "total_spent": "18000",
+    "avg_spent_per_day": 3000.0,
+    "avg_spent_per_transaction": 1500.0,
+    "transaction_count": 12,
+    "days_count": 6
+  },
+  "выходные_дни": {
+    "total_spent": "9000",
+    "avg_spent_per_day": 3000.0,
+    "avg_spent_per_transaction": 1500.0,
+    "transaction_count": 6,
+    "days_count": 3
+  },
+  "сравнение": {
+    "соотношение_рабочие_к_выходным": 1.0,
+    "доля_рабочих_дней_в_тратах": "66.67%",
+    "доля_выходных_дней_в_тратах": "33.33%"
+  }
+}
